@@ -8,16 +8,16 @@ public class Main{
         String s2 = scn.next();
         
       
-  
+       System.out.println(solution(s1, s2));
   }
-  public static int solution(String s1,String s2)
+  public static String solution(String s1,String s2)
   {
     String ans ="";
     HashMap<Character, Integer> map2 = new HashMap<>();
-    for(int i=0; i<s1.length();i++)
+    for(int i=0; i<s2.length();i++)
       {
-        char ch = s1.charAt(i);
-        map2.put(ch, getOrDefault(ch,0)+1);
+        char ch = s2.charAt(i);
+        map2.put(ch,map2.getOrDefault(ch,0)+1);
         
         
       }
@@ -35,42 +35,45 @@ public class Main{
             {
               i++;
               char ch = s1.charAt(i);
-              map1.put(ch,getOrDefault(ch,0)+1);
+              map1.put(ch,map1.getOrDefault(ch,0)+1);
               if(map1.getOrDefault(ch,0) <= map2.getOrDefault(ch,0))
               {
                 match++;
               }
-              f1=truel
+              f1=true;
             }
           while(j<i && match==desired_match)
             {
-              String pans = s1.substring(j+1,i+1);
-              if(ans.length()==0 && pans.length()<ans.length())
-              {
+            String pans = s1.substring(j+1,i+1);
+            if(ans.length()==0 || pans.length()<ans.length())
+            {
                 ans = pans;
-              }
+            }
             
-          j++;
-          char ch = s1.charAt(j);
-          if(map1.getOrDefault(ch,0)==1)
-          {
-            map1.remove(ch);
-          }
-          else
-          {
-            map1.put(ch,map.get(ch)-1);
-          }
-          if(map1.getOrDefault(ch,0)< map2.getOrDefault(ch,0))
-          {
-            mct--;
-          }
+           j++;
+           char ch = s1.charAt(j);
+           if(map1.get(ch)==1)
+           {
+             map1.remove(ch);
+           }
+           else
+           {
+             map1.put(ch,map1.get(ch)-1);
+           }
+           if(map1.getOrDefault(ch,0) < map2.getOrDefault(ch,0))
+           {
+             match--;
+           }
+           f2=true;
         }
-          f2=true;
-        }
-    if(f1==false;f2==false)
-    {
-      break;
-    }
-    
+         
+        
+       if(f1==false && f2==false)
+       {
+        break;
+       }
+   }
+   
+  return ans;
   }
 }
